@@ -1,10 +1,23 @@
 .card {
-  width: 80%;
-  padding: 5px;
+  background: white;
+  margin: auto;
+  width: 50%;
+  border: 10px 20px;
+  /* padding: 5px; */
   align-items: center;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 255, 0.2);
 }
 
 .title {
-  font-size: small;
-  color: grey;
+  padding: 40px 40px 0px 40px;
+  background-color: white;
+  font-size: 12px;
+  color: black;
+}
+
+.para {
+  padding: 10px 40px 40px 40px;
+  background-color: white;
+  font-size: 18px;
+  color: black;
 }

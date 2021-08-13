@@ -4,8 +4,8 @@ export default function Cards(props) {
   return (
     <>
       <div className={classes.card}>
-        <h1 className={classes.title}>{props.chapter}</h1>
-        <p className={classes.card}>{props.highlight}</p>
+        <h4 className={classes.title}>{props.chapter}</h4>
+        <p className={classes.para}>{props.highlight}</p>
       </div>
     </>
   )
