@@ -31,6 +31,15 @@
   outline: none;
 }
 .button {
+  border: none;
   outline: none;
-  background-color: white;
+  background-color: transparent;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button:hover svg {
+  color: blue;
 }
