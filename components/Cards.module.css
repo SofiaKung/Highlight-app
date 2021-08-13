@@ -21,3 +21,16 @@
   font-size: 18px;
   color: black;
 }
+.icon {
+  width: 20px;
+  color: black;
+}
+.iconSection {
+  background-color: white;
+  border: none;
+  outline: none;
+}
+.button {
+  outline: none;
+  background-color: white;
+}
