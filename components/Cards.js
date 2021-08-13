@@ -1,4 +1,6 @@
 import classes from './Cards.module.css'
+import { useState } from 'react'
+
 import {
   ChatAltIcon,
   TrashIcon,
@@ -7,11 +9,22 @@ import {
 } from '@heroicons/react/outline'
 
 export default function Cards(props) {
+  const [note, setNote] = useState([])
+
+  const changeHandler = (event) => {
+    setNote(event.target.value)
+  }
+
   return (
     <>
       <div className={classes.card}>
         <h4 className={classes.title}>{props.chapter}</h4>
         <p className={classes.para}>{props.highlight}</p>
+        <div className={classes.note}>
+          <div contentEditable="true">{props.note}</div>
+        </div>
+
+        {/* icons section */}
         <div className={classes.iconSection}>
           <button className={classes.button}>
             <ChatAltIcon className={classes.icon} />

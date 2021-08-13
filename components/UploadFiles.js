@@ -21,6 +21,7 @@ function UploadFiles() {
           results.data.map((element) => ({
             highlight: element.quote,
             chapter: element.chapter,
+            note: element.note,
           })),
         )
 
@@ -42,8 +43,7 @@ function UploadFiles() {
         <h3> 1. How to import your highlights </h3>
         <p>
           Make sure the file is in CSV format. Label your column name according
-          to these header names - ‘Book Name’, ‘Chapter’, ‘Highlights’ and
-          ‘Notes’.
+          to these header names - ‘bookname’, ‘chapter’, ‘quote’ and ‘note’.
         </p>
         <input type="file" name="file" onChange={changeHandler}></input>
         <button onClick={submitFile}>Upload your higlights</button>
@@ -52,7 +52,11 @@ function UploadFiles() {
         <div>
           {parsedCsv.map((item, index) => (
             <>
-              <Cards highlight={item.highlight} chapter={item.chapter} />
+              <Cards
+                highlight={item.highlight}
+                chapter={item.chapter}
+                note={item.note}
+              />
             </>
           ))}
         </div>

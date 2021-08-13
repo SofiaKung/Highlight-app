@@ -23,17 +23,29 @@
   text-align: justify;
 }
 
-.icon {
-  width: 20px;
-  color: black;
+.note {
+  padding: 10px 40px 40px 40px;
+  background-color: white;
+  font-size: 14px;
+  color: grey;
+  text-align: justify;
 }
 
 .iconSection {
+  display: flex;
   background-color: white;
+  justify-content: flex-end;
   border: none;
   outline: none;
+  padding: 10px 10px;
+  /* position: absolute; */
 }
 
+.icon {
+  padding: 2px 4px 10px 2px;
+  width: 25px;
+  color: black;
+}
 .button {
   border: none;
   outline: none;
@@ -45,5 +57,5 @@
 }
 
 .button:hover svg {
-  color: blue;
+  color: lightblue;
 }
