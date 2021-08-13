@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Cards from './Cards'
 
 import Papa from 'papaparse'
 
@@ -11,8 +12,17 @@ function UploadFiles() {
 
   const submit = () => {
     Papa.parse(selectedFile, {
+      header: true,
+      dynamicTyping: true,
       complete: function (results) {
-        console.log(results)
+        console.log(results.data)
+
+        window.parsedCsv = results.data.map((element) => ({
+          highlight: element.quote,
+          chapter: element.chapter,
+        }))
+
+        console.log(parsedCsv)
       },
     })
   }
@@ -24,11 +34,21 @@ function UploadFiles() {
   }
 
   return (
-    <div>
-      <input type="file" name="file" onChange={changeHandler}></input>
-      <button onClick={submitFile}>Upload your higlights</button>
-    </div>
+    <>
+      <div>
+        <input type="file" name="file" onChange={changeHandler}></input>
+        <button onClick={submitFile}>Upload your higlights</button>
+      </div>
+      {parsedCsv.length > 0 && (
+        <div>
+          {parsedCsv.map((item, index) => (
+            <>
+              <Cards highlight={item.highlight} chapter={item.chapter} />
+            </>
+          ))}{' '}
+        </div>
+      )}
+    </>
   )
 }
-
 export default UploadFiles
