@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Cards from './Cards'
+import classes from './UploadFiles.module.css'
 
 import Papa from 'papaparse'
 
@@ -36,7 +37,14 @@ function UploadFiles() {
 
   return (
     <>
-      <div>
+      <h1 className={classes.heading}>Upload your highlights </h1>
+      <div className={classes.center}>
+        <h3> 1. How to import your highlights </h3>
+        <p>
+          Make sure the file is in CSV format. Label your column name according
+          to these header names - ‘Book Name’, ‘Chapter’, ‘Highlights’ and
+          ‘Notes’.
+        </p>
         <input type="file" name="file" onChange={changeHandler}></input>
         <button onClick={submitFile}>Upload your higlights</button>
       </div>
