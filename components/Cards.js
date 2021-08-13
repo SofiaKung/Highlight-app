@@ -9,19 +9,33 @@ import {
 } from '@heroicons/react/outline'
 
 export default function Cards(props) {
-  const [note, setNote] = useState([])
+  const [editQuote, setEditQuote] = useState('false')
+  const [editNote, updateNote] = useState('false')
 
-  const changeHandler = (event) => {
-    setNote(event.target.value)
+  function enableQuoteEdit() {
+    setEditQuote((editQuote) => 'true')
+  }
+
+  function saveHighlight() {
+    setEditQuote((editQuote) => 'false')
+  }
+
+  function EditNote() {
+    updateNote(event.target.value)
   }
 
   return (
     <>
       <div className={classes.card}>
         <h4 className={classes.title}>{props.chapter}</h4>
-        <p className={classes.para}>{props.highlight}</p>
+        <div className={classes.para} contentEditable={editQuote}>
+          {props.highlight}
+          <button onClick={saveHighlight}>Save</button>
+        </div>
+        {/* start of notes section */}
         <div className={classes.note}>
           <div contentEditable="true">{props.note}</div>
+          <button onClick={EditNote}>Save</button>
         </div>
 
         {/* icons section */}
@@ -29,7 +43,7 @@ export default function Cards(props) {
           <button className={classes.button}>
             <ChatAltIcon className={classes.icon} />
           </button>
-          <button className={classes.button}>
+          <button className={classes.button} onClick={enableQuoteEdit}>
             <PencilAltIcon className={classes.icon} />
           </button>
           <button className={classes.button}>
