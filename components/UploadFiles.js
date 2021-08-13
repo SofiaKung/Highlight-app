@@ -5,6 +5,7 @@ import Papa from 'papaparse'
 
 function UploadFiles() {
   const [selectedFile, setSelectedFile] = useState()
+  const [parsedCsv, setparsedCsv] = useState([])
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0])
@@ -15,12 +16,12 @@ function UploadFiles() {
       header: true,
       dynamicTyping: true,
       complete: function (results) {
-        console.log(results.data)
-
-        window.parsedCsv = results.data.map((element) => ({
-          highlight: element.quote,
-          chapter: element.chapter,
-        }))
+        setparsedCsv(
+          results.data.map((element) => ({
+            highlight: element.quote,
+            chapter: element.chapter,
+          })),
+        )
 
         console.log(parsedCsv)
       },
@@ -45,7 +46,7 @@ function UploadFiles() {
             <>
               <Cards highlight={item.highlight} chapter={item.chapter} />
             </>
-          ))}{' '}
+          ))}
         </div>
       )}
     </>

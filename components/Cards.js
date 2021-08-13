@@ -1,9 +1,11 @@
+import classes from './Cards.module.css'
+
 export default function Cards(props) {
   return (
     <>
-      <div>
-        <h1>{props.chapter}</h1>
-        <p>{props.highlight}</p>
+      <div className={classes.card}>
+        <h1 className={classes.title}>{props.chapter}</h1>
+        <p className={classes.card}>{props.highlight}</p>
       </div>
     </>
   )
