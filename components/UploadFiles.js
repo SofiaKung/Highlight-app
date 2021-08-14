@@ -12,7 +12,7 @@ function UploadFiles() {
     setSelectedFile(event.target.files[0])
   }
 
-  const submit = () => {
+  async function submit() {
     Papa.parse(selectedFile, {
       header: true,
       dynamicTyping: true,
@@ -24,10 +24,18 @@ function UploadFiles() {
             note: element.note,
           })),
         )
-
         console.log(parsedCsv)
       },
     })
+
+    const response = await fetch('api/upload-highlight', {
+      method: 'POST',
+      body: JSON.stringify(parsedCsv),
+      headers: { 'Content-Type': 'application/json' },
+    })
+
+    const data = await response.json()
+    console.log(data)
   }
 
   const submitFile = (event) => {
