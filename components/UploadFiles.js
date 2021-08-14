@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Cards from './Cards'
 import classes from './UploadFiles.module.css'
 
@@ -12,7 +12,11 @@ function UploadFiles() {
     setSelectedFile(event.target.files[0])
   }
 
-  async function submit() {
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    console.info('submit button clicked')
+
     Papa.parse(selectedFile, {
       header: true,
       dynamicTyping: true,
@@ -24,25 +28,20 @@ function UploadFiles() {
             note: element.note,
           })),
         )
-        console.log(parsedCsv)
       },
     })
+  }
 
+  useEffect(async () => {
     const response = await fetch('api/upload-highlight', {
       method: 'POST',
       body: JSON.stringify(parsedCsv),
       headers: { 'Content-Type': 'application/json' },
     })
 
-    const data = await response.json()
-    console.log(data)
-  }
-
-  const submitFile = (event) => {
-    console.log('submit button clicked')
-    event.preventDefault()
-    submit()
-  }
+    console.info("[handleSubmit] data:", response)
+    const data = response.json()
+  }, [parsedCsv])
 
   return (
     <>
@@ -54,7 +53,7 @@ function UploadFiles() {
           to these header names - ‘bookname’, ‘chapter’, ‘quote’ and ‘note’.
         </p>
         <input type="file" name="file" onChange={changeHandler}></input>
-        <button onClick={submitFile}>Upload your higlights</button>
+        <button onClick={handleSubmit}>Upload your higlights</button>
       </div>
       {parsedCsv.length > 0 && (
         <div>
