@@ -1,0 +1,16 @@
+.heading {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+
+  padding: 80px 0px 40px;
+  align-items: center;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+
+  /* padding: 5px; */
+  align-items: center;
+}
