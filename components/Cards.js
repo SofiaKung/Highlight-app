@@ -24,17 +24,31 @@ export default function Cards(props) {
     updateNote(event.target.value)
   }
 
+  const handleUpdate = async (id, updatedData) => {
+    await fetch('api/update-highlight/' + id, {
+      method: 'PUT', //put for updating
+      body: JSON.stringify(updatedData),
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+
   return (
     <>
       <div className={classes.card}>
         <h4 className={classes.title}>{props.chapter}</h4>
-        <div className={classes.para} contentEditable={editQuote}>
+        {/* <div className={classes.para} contentEditable={editQuote}>
+          {props.highlight}
+          <button onClick={saveHighlight}>Save</button>
+        </div> */}
+
+        <div className={classes.para}>
           {props.highlight}
           <button onClick={saveHighlight}>Save</button>
         </div>
         {/* start of notes section */}
         <div className={classes.note}>
-          <div contentEditable="true">{props.note}</div>
+          {/* <div contentEditable="true">{props.note}</div> */}
+          <div>{props.note}</div>
           <button onClick={EditNote}>Save</button>
         </div>
 

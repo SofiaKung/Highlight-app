@@ -1,39 +1,45 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Cards from './Cards'
 import classes from './UploadFiles.module.css'
 
 import Papa from 'papaparse'
 
-function UploadFiles() {
+export default function UploadFiles() {
   const [selectedFile, setSelectedFile] = useState()
-  const [parsedCsv, setparsedCsv] = useState([])
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0])
   }
 
-  const submit = () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    console.info('submit button clicked')
+
     Papa.parse(selectedFile, {
       header: true,
       dynamicTyping: true,
       complete: function (results) {
-        setparsedCsv(
+        handleUpload(
           results.data.map((element) => ({
             highlight: element.quote,
+            modifiedHighlight: '',
             chapter: element.chapter,
             note: element.note,
+            favorite: false,
           })),
-        )
-
-        console.log(parsedCsv)
+        ).then(window.location.reload()) // reload the page so that highlights are fetched
       },
     })
   }
 
-  const submitFile = (event) => {
-    console.log('submit button clicked')
-    event.preventDefault()
-    submit()
+  //upload highlights
+  const handleUpload = async (file) => {
+    await fetch('api/upload-highlight', {
+      method: 'POST',
+      body: JSON.stringify(file),
+      headers: { 'Content-Type': 'application/json' },
+    })
   }
 
   return (
@@ -46,22 +52,8 @@ function UploadFiles() {
           to these header names - ‘bookname’, ‘chapter’, ‘quote’ and ‘note’.
         </p>
         <input type="file" name="file" onChange={changeHandler}></input>
-        <button onClick={submitFile}>Upload your higlights</button>
+        <button onClick={handleSubmit}>Upload your higlights</button>
       </div>
-      {parsedCsv.length > 0 && (
-        <div>
-          {parsedCsv.map((item, index) => (
-            <>
-              <Cards
-                highlight={item.highlight}
-                chapter={item.chapter}
-                note={item.note}
-              />
-            </>
-          ))}
-        </div>
-      )}
     </>
   )
 }
-export default UploadFiles
