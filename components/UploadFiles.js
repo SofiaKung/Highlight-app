@@ -21,7 +21,7 @@ function UploadFiles() {
       header: true,
       dynamicTyping: true,
       complete: function (results) {
-        setparsedCsv(
+        handleUpload(
           results.data.map((element) => ({
             highlight: element.quote,
             modifiedHighlight: '',
@@ -29,35 +29,31 @@ function UploadFiles() {
             note: element.note,
             favorite: false,
           })),
-        )
+        ).then(handleRead())
       },
     })
-    handleUpload()
   }
 
   //upload highlights
-  const handleUpload = async () => {
+  const handleUpload = async (file) => {
     await fetch('api/upload-highlight', {
       method: 'POST',
-      body: JSON.stringify(parsedCsv),
+      body: JSON.stringify(file),
       headers: { 'Content-Type': 'application/json' },
     })
-
-    handleRead()
+    // handleRead()
   }
   // read highlights
   const handleRead = async () => {
     console.log('reading start')
-    const res = await fetch('api/read-highlights', {
-      method: 'GET', //get for read
-      // headers: { 'Content-Type': 'application/json' },
-    })
+    const result = await fetch('api/read-highlights')
 
-    // get the response to update the state
-    // const result = JSON.stringify(res)
-    console.log('receive response:', res)
-    // setparsedCsv(result) //update the state
-    // console.log('Highlight retrieved', result)
+    // to stringify the json object and then parse as json again
+    const data = await result.json()
+    const output = JSON.parse(JSON.stringify(data))
+
+    console.log('receive response:', output)
+    setparsedCsv(output)
   }
 
   const handleUpdate = async (id, updatedData) => {
@@ -66,7 +62,6 @@ function UploadFiles() {
       body: JSON.stringify(updatedData),
       headers: { 'Content-Type': 'application/json' },
     })
-    handleRead()
   }
 
   return (

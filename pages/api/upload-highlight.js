@@ -18,7 +18,6 @@ async function handler(req, res) {
     console.info('[uploadHighlight] result:', result)
 
     client.close()
-    res.status(201).json({ message: 'highlight inserted' })
   }
 }
 
