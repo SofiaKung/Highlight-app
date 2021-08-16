@@ -42,14 +42,6 @@ export default function UploadFiles() {
     })
   }
 
-  const handleUpdate = async (id, updatedData) => {
-    await fetch('api/update-highlight/' + id, {
-      method: 'PUT', //put for updating
-      body: JSON.stringify(updatedData),
-      headers: { 'Content-Type': 'application/json' },
-    })
-  }
-
   return (
     <>
       <h1 className={classes.heading}>Upload your highlights </h1>
