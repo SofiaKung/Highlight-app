@@ -7,7 +7,6 @@ import Papa from 'papaparse'
 function UploadFiles() {
   const [selectedFile, setSelectedFile] = useState()
   const [parsedCsv, setparsedCsv] = useState([])
-  const [retrievedHighlight, setRetrievedHighlight] = useState([])
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0])
@@ -33,32 +32,32 @@ function UploadFiles() {
         )
       },
     })
+    handleUpload()
   }
 
+  //upload highlights
   const handleUpload = async () => {
     await fetch('api/upload-highlight', {
       method: 'POST',
       body: JSON.stringify(parsedCsv),
       headers: { 'Content-Type': 'application/json' },
     })
+
     handleRead()
   }
-
-  useEffect(() => {
-    handleUpload()
-  }, [parsedCsv])
-
   // read highlights
   const handleRead = async () => {
-    await fetch('api/read-highlight', {
+    console.log('reading start')
+    const res = await fetch('api/read-highlights', {
       method: 'GET', //get for read
-      headers: { 'Content-Type': 'application/json' },
+      // headers: { 'Content-Type': 'application/json' },
     })
 
     // get the response to update the state
-    const result = JSON.parse(response.body).result
-    setRetrievedHighlights(result) //update the state
-    console.log('Highlight retrieved', result)
+    // const result = JSON.stringify(res)
+    console.log('receive response:', res)
+    // setparsedCsv(result) //update the state
+    // console.log('Highlight retrieved', result)
   }
 
   const handleUpdate = async (id, updatedData) => {
