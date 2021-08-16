@@ -4,9 +4,8 @@ import classes from './UploadFiles.module.css'
 
 import Papa from 'papaparse'
 
-function UploadFiles() {
+export default function UploadFiles() {
   const [selectedFile, setSelectedFile] = useState()
-  const [parsedCsv, setparsedCsv] = useState([])
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0])
@@ -29,7 +28,7 @@ function UploadFiles() {
             note: element.note,
             favorite: false,
           })),
-        ).then(handleRead())
+        ).then(window.location.reload()) // reload the page so that highlights are fetched
       },
     })
   }
@@ -41,19 +40,6 @@ function UploadFiles() {
       body: JSON.stringify(file),
       headers: { 'Content-Type': 'application/json' },
     })
-    // handleRead()
-  }
-  // read highlights
-  const handleRead = async () => {
-    console.log('reading start')
-    const result = await fetch('api/read-highlights')
-
-    // to stringify the json object and then parse as json again
-    const data = await result.json()
-    const output = JSON.parse(JSON.stringify(data))
-
-    console.log('receive response:', output)
-    setparsedCsv(output)
   }
 
   const handleUpdate = async (id, updatedData) => {
@@ -76,20 +62,6 @@ function UploadFiles() {
         <input type="file" name="file" onChange={changeHandler}></input>
         <button onClick={handleSubmit}>Upload your higlights</button>
       </div>
-      {parsedCsv.length > 0 && (
-        <div>
-          {parsedCsv.map((item, index) => (
-            <>
-              <Cards
-                highlight={item.highlight}
-                chapter={item.chapter}
-                note={item.note}
-              />
-            </>
-          ))}
-        </div>
-      )}
     </>
   )
 }
-export default UploadFiles

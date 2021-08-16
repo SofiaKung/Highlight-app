@@ -24,6 +24,14 @@ export default function Cards(props) {
     updateNote(event.target.value)
   }
 
+  const handleUpdate = async (id, updatedData) => {
+    await fetch('api/update-highlight/' + id, {
+      method: 'PUT', //put for updating
+      body: JSON.stringify(updatedData),
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+
   return (
     <>
       <div className={classes.card}>
