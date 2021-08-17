@@ -20,8 +20,13 @@ export default function Cards(props) {
     setEditQuote((editQuote) => 'false')
   }
 
-  function EditNote() {
-    updateNote(event.target.value)
+  function handleSave() {
+    let id = props._id
+    let highlight = props.highlight
+    let notes = props.note
+    handleUpdate(id, { highlight, notes })
+    // console.log(ObjectId(props._id))
+    // updateNote(event.target.value)
   }
 
   const handleUpdate = async (id, updatedData) => {
@@ -36,20 +41,18 @@ export default function Cards(props) {
     <>
       <div className={classes.card}>
         <h4 className={classes.title}>{props.chapter}</h4>
-        {/* <div className={classes.para} contentEditable={editQuote}>
+        <p hidden className={classes._id}>
+          {props._id}
+        </p>
+        <div className={classes.para} contentEditable={editQuote}>
           {props.highlight}
-          <button onClick={saveHighlight}>Save</button>
-        </div> */}
-
-        <div className={classes.para}>
-          {props.highlight}
-          <button onClick={saveHighlight}>Save</button>
         </div>
+
         {/* start of notes section */}
         <div className={classes.note}>
-          {/* <div contentEditable="true">{props.note}</div> */}
-          <div>{props.note}</div>
-          <button onClick={EditNote}>Save</button>
+          <div contentEditable="true">{props.note}</div>
+
+          <button onClick={handleSave}>Save</button>
         </div>
 
         {/* icons section */}

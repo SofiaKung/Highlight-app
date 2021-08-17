@@ -1,16 +1,17 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 // /api/update-highlights/[id]
 
-import { connectToDatabase } from '../../../utils/mongodb'
+import { connectToDatabase } from '../../utils/mongodb'
 
 async function handler(req, res) {
   console.info('[updateHighlight] triggered')
   if (req.method === 'PUT') {
-    // const data = req.body // built in field for incoming data
-    // const { highlight, note } = data // destructure to get highlight and notes
-    const { id } = req.query
+    const data = req.body // built in field for incoming data
+    const { highlight, note } = data // destructure to get highlight and notes
 
-    res.end(`Post: ${id}`)
+    // const { id } = req.query
+
+    // res.end(`Post: ${id}`)
     // console.log(req)
 
     // const { db } = await connectToDatabase()

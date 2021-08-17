@@ -12,6 +12,7 @@ export default function Homepage({ properties }) {
           {properties.map((item, index) => (
             <>
               <Cards
+                _id={item._id}
                 highlight={item.highlight}
                 chapter={item.chapter}
                 note={item.note}

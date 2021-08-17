@@ -20,6 +20,7 @@ export default function UploadFiles() {
       header: true,
       dynamicTyping: true,
       complete: function (results) {
+        // to upload highlights into db
         handleUpload(
           results.data.map((element) => ({
             highlight: element.quote,
