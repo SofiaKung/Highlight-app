@@ -21,6 +21,7 @@ export default function Homepage({ properties }) {
                 }
                 chapter={item.chapter}
                 note={item.note}
+                favorite={item.favorite}
               />
             </>
           ))}
@@ -37,7 +38,7 @@ export async function getServerSideProps(context) {
 
   const data = JSON.parse(JSON.stringify(result))
 
-  console.log(data)
+  // console.log(data)
 
   return {
     props: { properties: data },

@@ -12,7 +12,7 @@ async function handler(req, res) {
 
     const highlightCollection = await db.collection('highlights')
 
-    console.info('[uploadHighlight] highlightCollection', highlightCollection)
+    // console.info('[uploadHighlight] highlightCollection', highlightCollection)
 
     const result = await highlightCollection.insertMany(data)
     console.info('[uploadHighlight] result:', result)

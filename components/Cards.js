@@ -8,40 +8,53 @@ import {
   HeartIcon,
 } from '@heroicons/react/outline'
 
+import { HeartIcon as SolidIcon } from '@heroicons/react/solid'
+
 export default function Cards(props) {
   const [editQuote, setEditQuote] = useState(false)
-  const [modihighlight, setHighlight] = useState(props.highlight)
-  const [modinote, setNote] = useState(props.note)
+  const [Highlight, setHighlight] = useState(props.highlight)
+  const [Note, setNote] = useState(props.note)
+  const [isFavorite, setFavorite] = useState(props.favorite)
 
+  // enable highlight to be edited
   function enableQuoteEdit() {
-    setEditQuote((editQuote) => 'true')
+    setEditQuote((editQuote) => true)
   }
 
-  function saveHighlight() {
-    setEditQuote((editQuote) => 'false')
+  // enable favorite and update favorite tag
+  function enableFavorite() {
+    setFavorite(() => !isFavorite)
+    console.log('Favorite status:', !isFavorite)
+    handleFavorite()
   }
 
-  // update highlights/ notesaccording to input
+  // update Note state according to input
   const changeNoteHandler = (e) => {
-    console.log('change  nothandler running')
+    console.log('change note handler running')
     setNote(e.target.innerText)
-    console.log('updated notes', modinote)
+    console.log('updated notes', Note)
   }
 
-  // update highlights/ notesaccording to input
+  // update Highlight state according to input
   const changeHighlightHandler = (e) => {
-    console.log('change higlight handler running')
+    console.log('change highlight handler running')
     setHighlight(e.target.innerText)
-    console.log('updated highlight', modihighlight)
+    console.log('updated highlight', Highlight)
   }
 
-  // update highlight and note to db
+  // update highlight and note to db upon clicking Save button
   const handleSave = () => {
-    console.log('in handle save', modihighlight)
     let id = props._id
-    let modifiedHighlight = modihighlight //save to modified highlight column name
-    let note = modinote //save to modified highlight note name
-    handleUpdate(id, { modihighlight, note })
+    let modifiedHighlight = Highlight //save to modified highlight column name
+    let note = Note //save to modified highlight note name
+    handleUpdate(id, { modifiedHighlight, note })
+  }
+
+  // update favorite tag to db
+  const handleFavorite = () => {
+    let id = props._id
+    let favorite = !isFavorite //save to modified highlight column name
+    handleUpdate(id, { favorite })
   }
 
   const handleUpdate = async (id, updatedData) => {
@@ -90,9 +103,17 @@ export default function Cards(props) {
           <button className={classes.button} onClick={enableQuoteEdit}>
             <PencilAltIcon className={classes.icon} />
           </button>
-          <button className={classes.button}>
-            <HeartIcon className={classes.icon} />
-          </button>
+
+          {isFavorite ? (
+            <button className={classes.button} onClick={enableFavorite}>
+              <SolidIcon className={classes.icon} />
+            </button>
+          ) : (
+            <button className={classes.button} onClick={enableFavorite}>
+              <HeartIcon HeartIcon className={classes.icon} />
+            </button>
+          )}
+
           <button className={classes.button}>
             <TrashIcon className={classes.icon} />
           </button>

@@ -9,9 +9,7 @@ async function handler(req, res) {
   if (req.method === 'PUT') {
     const { id } = req.query
     const data = req.body // built in field for incoming data
-    console.log('[input]', id, req.body)
-
-    console.info('[res]' + id)
+    console.info('[updateHighlight] input id: ', id, ' input body: ', req.body)
 
     const { db } = await connectToDatabase()
     const highlightCollection = await db.collection('highlights')
