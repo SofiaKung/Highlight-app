@@ -46,6 +46,7 @@
   width: 25px;
   color: black;
 }
+
 .button {
   border: none;
   outline: none;
@@ -57,7 +58,7 @@
 }
 
 .button:hover svg {
-  color: lightblue;
+  color: #717ef3;
 }
 
 .saveButton {
@@ -71,10 +72,10 @@
   display: inline-block;
   font-size: 16px;
   /* spacing around button */
-  margin: 20px 2px;
+  margin: 20px 2px 5px 2px;
   cursor: pointer;
 }
 
 .saveButton:hover {
-  background-color: grey;
+  background-color: darkslateblue;
 }

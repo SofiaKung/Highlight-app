@@ -22,7 +22,9 @@ export default function UploadFiles() {
       complete: function (results) {
         // to upload highlights into db
         handleUpload(
+          // defines the column names to take in
           results.data.map((element) => ({
+            bookName: element.bookname,
             highlight: element.quote,
             modifiedHighlight: '',
             chapter: element.chapter,

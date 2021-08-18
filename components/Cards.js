@@ -104,7 +104,7 @@ export default function Cards(props) {
             suppressContentEditableWarning={true}
             onInput={changeNoteHandler}
           >
-            {props.note}
+            {props.note ? props.note : 'Note'}
           </div>
 
           <button className={classes.saveButton} onClick={handleSave}>
