@@ -18,9 +18,9 @@ async function handler(req, res) {
       { _id: ObjectId(id) },
       { $set: data },
     )
-    console.info('[updateHighlight] result:', result)
 
-    res.status(201).json({ message: 'highlight updated', result: result })
+    res.status(200).json({ message: 'highlight updated', result: result })
+    console.info('[updateHighlight] result:', result)
   }
 }
 

@@ -1,24 +1,25 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 // /api/upload-highlight
-import { MongoClient } from 'mongodb'
-import { connectToDatabase } from '../../utils/mongodb'
 
-async function handler(req, res) {
-  console.log('[uploadHighlight] triggered')
-  if (req.method === 'POST') {
-    const data = req.body
+// import { MongoClient } from 'mongodb'
+// import { connectToDatabase } from '../../utils/mongodb'
 
-    const { db } = await connectToDatabase()
+// async function handler(req, res) {
+//   console.log('[uploadHighlight] triggered')
+//   if (req.method === 'POST') {
+//     const data = req.body
 
-    const highlightCollection = await db.collection('highlights')
+//     const { db } = await connectToDatabase()
 
-    // console.info('[uploadHighlight] highlightCollection', highlightCollection)
+//     const highlightCollection = await db.collection('highlights')
 
-    const result = await highlightCollection.insertMany(data)
-    console.info('[uploadHighlight] result:', result)
+//     // console.info('[uploadHighlight] highlightCollection', highlightCollection)
 
-    client.close()
-  }
-}
+//     const result = await highlightCollection.insertMany(data)
+//     console.info('[uploadHighlight] result:', result)
 
-export default handler
+//     client.close()
+//   }
+// }
+
+// export default handler

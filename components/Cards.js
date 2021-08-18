@@ -5,7 +5,7 @@ import {
   ChatAltIcon,
   TrashIcon,
   PencilAltIcon,
-  HeartIcon,
+  HeartIcon as OutlineIcon,
 } from '@heroicons/react/outline'
 
 import { HeartIcon as SolidIcon } from '@heroicons/react/solid'
@@ -57,11 +57,26 @@ export default function Cards(props) {
     handleUpdate(id, { favorite })
   }
 
+  // Update highlights
   const handleUpdate = async (id, updatedData) => {
     console.log('start of handleUpdate ' + id)
     await fetch('api/update-highlights/' + id, {
       method: 'PUT', //put for updating
       body: JSON.stringify(updatedData),
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+
+  // enable favorite and update favorite tag
+  const enableDelete = async () => {
+    handleDelete(props._id).then(window.location.reload())
+  }
+
+  // delete highlight
+  const handleDelete = async (id) => {
+    console.log('delete highlight initated: ' + id)
+    await fetch('api/delete-highlights/' + id, {
+      method: 'DELETE', //put for updating
       headers: { 'Content-Type': 'application/json' },
     })
   }
@@ -92,7 +107,9 @@ export default function Cards(props) {
             {props.note}
           </div>
 
-          <button onClick={handleSave}>Save</button>
+          <button className={classes.saveButton} onClick={handleSave}>
+            Save
+          </button>
         </div>
 
         {/* icons section */}
@@ -110,12 +127,12 @@ export default function Cards(props) {
             </button>
           ) : (
             <button className={classes.button} onClick={enableFavorite}>
-              <HeartIcon HeartIcon className={classes.icon} />
+              <OutlineIcon HeartIcon className={classes.icon} />
             </button>
           )}
 
           <button className={classes.button}>
-            <TrashIcon className={classes.icon} />
+            <TrashIcon className={classes.icon} onClick={enableDelete} />
           </button>
         </div>
       </div>
