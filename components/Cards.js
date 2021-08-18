@@ -10,7 +10,7 @@ import {
 
 export default function Cards(props) {
   const [editQuote, setEditQuote] = useState('false')
-  const [editNote, updateNote] = useState('false')
+  const [modifiedHighlight, setHighlight] = useState('default')
 
   function enableQuoteEdit() {
     setEditQuote((editQuote) => 'true')
@@ -20,21 +20,29 @@ export default function Cards(props) {
     setEditQuote((editQuote) => 'false')
   }
 
-  function handleSave() {
+  // update highlight and note to db
+  const handleSave = () => {
+    console.log('in handle save', modifiedHighlight)
     let id = props._id
-    let highlight = props.highlight
-    let notes = props.note
-    handleUpdate(id, { highlight, notes })
-    // console.log(ObjectId(props._id))
-    // updateNote(event.target.value)
+    let modifiedHighlight = modifiedHighlight //save to modified highlight column name
+    let note = props.note //save to modified highlight note name
+    handleUpdate(id, { modifiedHighlight, note })
   }
 
   const handleUpdate = async (id, updatedData) => {
-    await fetch('api/update-highlight/' + id, {
+    console.log('start of handleUpdate ' + id)
+    await fetch('api/update-highlights/' + id, {
       method: 'PUT', //put for updating
       body: JSON.stringify(updatedData),
       headers: { 'Content-Type': 'application/json' },
     })
+  }
+
+  // update highlights according to input
+  const changeHandler = (e) => {
+    console.log('change handler running')
+    setHighlight(e.target.innerText)
+    console.log('in change handler', modifiedHighlight)
   }
 
   return (
@@ -44,13 +52,21 @@ export default function Cards(props) {
         <p hidden className={classes._id}>
           {props._id}
         </p>
-        <div className={classes.para} contentEditable={editQuote}>
+        <div
+          className={classes.para}
+          contentEditable={editQuote}
+          suppressContentEditableWarning={true}
+          onInput={changeHandler}
+        >
           {props.highlight}
         </div>
+        <p>{modifiedHighlight}</p>
 
         {/* start of notes section */}
         <div className={classes.note}>
-          <div contentEditable="true">{props.note}</div>
+          <div contentEditable="true" suppressContentEditableWarning={true}>
+            {props.note}
+          </div>
 
           <button onClick={handleSave}>Save</button>
         </div>

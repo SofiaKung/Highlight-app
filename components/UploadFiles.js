@@ -36,11 +36,12 @@ export default function UploadFiles() {
 
   //upload highlights
   const handleUpload = async (file) => {
-    await fetch('api/upload-highlight', {
+    res = await fetch('api/upload-highlight', {
       method: 'POST',
       body: JSON.stringify(file),
       headers: { 'Content-Type': 'application/json' },
     })
+    console.log(res)
   }
 
   return (
