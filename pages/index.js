@@ -13,7 +13,12 @@ export default function Homepage({ properties }) {
             <>
               <Cards
                 _id={item._id}
-                highlight={item.highlight}
+                // to load modified highlights if available, else original highlights
+                highlight={
+                  item.modifiedHighlight
+                    ? item.modifiedHighlight
+                    : item.highlight
+                }
                 chapter={item.chapter}
                 note={item.note}
               />

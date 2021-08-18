@@ -9,8 +9,9 @@ import {
 } from '@heroicons/react/outline'
 
 export default function Cards(props) {
-  const [editQuote, setEditQuote] = useState('false')
-  const [modifiedHighlight, setHighlight] = useState('default')
+  const [editQuote, setEditQuote] = useState(false)
+  const [modihighlight, setHighlight] = useState(props.highlight)
+  const [modinote, setNote] = useState(props.note)
 
   function enableQuoteEdit() {
     setEditQuote((editQuote) => 'true')
@@ -20,13 +21,27 @@ export default function Cards(props) {
     setEditQuote((editQuote) => 'false')
   }
 
+  // update highlights/ notesaccording to input
+  const changeNoteHandler = (e) => {
+    console.log('change  nothandler running')
+    setNote(e.target.innerText)
+    console.log('updated notes', modinote)
+  }
+
+  // update highlights/ notesaccording to input
+  const changeHighlightHandler = (e) => {
+    console.log('change higlight handler running')
+    setHighlight(e.target.innerText)
+    console.log('updated highlight', modihighlight)
+  }
+
   // update highlight and note to db
   const handleSave = () => {
-    console.log('in handle save', modifiedHighlight)
+    console.log('in handle save', modihighlight)
     let id = props._id
-    let modifiedHighlight = modifiedHighlight //save to modified highlight column name
-    let note = props.note //save to modified highlight note name
-    handleUpdate(id, { modifiedHighlight, note })
+    let modifiedHighlight = modihighlight //save to modified highlight column name
+    let note = modinote //save to modified highlight note name
+    handleUpdate(id, { modihighlight, note })
   }
 
   const handleUpdate = async (id, updatedData) => {
@@ -36,13 +51,6 @@ export default function Cards(props) {
       body: JSON.stringify(updatedData),
       headers: { 'Content-Type': 'application/json' },
     })
-  }
-
-  // update highlights according to input
-  const changeHandler = (e) => {
-    console.log('change handler running')
-    setHighlight(e.target.innerText)
-    console.log('in change handler', modifiedHighlight)
   }
 
   return (
@@ -56,15 +64,18 @@ export default function Cards(props) {
           className={classes.para}
           contentEditable={editQuote}
           suppressContentEditableWarning={true}
-          onInput={changeHandler}
+          onInput={changeHighlightHandler}
         >
           {props.highlight}
         </div>
-        <p>{modifiedHighlight}</p>
 
         {/* start of notes section */}
         <div className={classes.note}>
-          <div contentEditable="true" suppressContentEditableWarning={true}>
+          <div
+            contentEditable="true"
+            suppressContentEditableWarning={true}
+            onInput={changeNoteHandler}
+          >
             {props.note}
           </div>
 
