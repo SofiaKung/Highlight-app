@@ -8,25 +8,11 @@
 
 //   const { db } = await connectToDatabase()
 
-//   const data = await ßdb.collection('highlights').find({}).toArray()
+//   const highlightCollection = await db.collection('highlights')
 
-//   res.json(data)
+//   const result = await highlightCollection.find({}).toArray()
+
+//   res.status(200).json(result)
 // }
 
 // export default handler
-
-import { connectToDatabase } from '../../utils/mongodb'
-
-async function handler(req, res) {
-  console.log('[readHighlight] triggered')
-
-  const { db } = await connectToDatabase()
-
-  const highlightCollection = await db.collection('highlights')
-
-  const result = await highlightCollection.find({}).toArray()
-
-  res.status(200).json(result)
-}
-
-export default handler

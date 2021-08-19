@@ -46,6 +46,7 @@
   width: 25px;
   color: black;
 }
+
 .button {
   border: none;
   outline: none;
@@ -57,5 +58,24 @@
 }
 
 .button:hover svg {
-  color: lightblue;
+  color: #717ef3;
+}
+
+.saveButton {
+  background-color: #717ef3;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  /* spacing around button */
+  margin: 20px 2px 5px 2px;
+  cursor: pointer;
+}
+
+.saveButton:hover {
+  background-color: darkslateblue;
 }

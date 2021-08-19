@@ -20,8 +20,11 @@ export default function UploadFiles() {
       header: true,
       dynamicTyping: true,
       complete: function (results) {
+        // to upload highlights into db
         handleUpload(
+          // defines the column names to take in
           results.data.map((element) => ({
+            bookName: element.bookname,
             highlight: element.quote,
             modifiedHighlight: '',
             chapter: element.chapter,
@@ -35,11 +38,12 @@ export default function UploadFiles() {
 
   //upload highlights
   const handleUpload = async (file) => {
-    await fetch('api/upload-highlight', {
+    res = await fetch('api/upload-highlight', {
       method: 'POST',
       body: JSON.stringify(file),
       headers: { 'Content-Type': 'application/json' },
     })
+    console.log(res)
   }
 
   return (

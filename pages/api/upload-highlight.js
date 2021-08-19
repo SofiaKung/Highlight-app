@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 // /api/upload-highlight
+
 import { MongoClient } from 'mongodb'
 import { connectToDatabase } from '../../utils/mongodb'
 
@@ -12,7 +13,7 @@ async function handler(req, res) {
 
     const highlightCollection = await db.collection('highlights')
 
-    console.info('[uploadHighlight] highlightCollection', highlightCollection)
+    // console.info('[uploadHighlight] highlightCollection', highlightCollection)
 
     const result = await highlightCollection.insertMany(data)
     console.info('[uploadHighlight] result:', result)
