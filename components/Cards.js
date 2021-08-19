@@ -127,7 +127,7 @@ export default function Cards(props) {
             </button>
           ) : (
             <button className={classes.button} onClick={enableFavorite}>
-              <OutlineIcon HeartIcon className={classes.icon} />
+              <OutlineIcon className={classes.icon} />
             </button>
           )}
 
