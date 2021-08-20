@@ -4,13 +4,13 @@
 import { connectToDatabase } from '../../utils/mongodb'
 
 async function handler(req, res) {
-  console.log('[read-bookname] triggered')
+  // console.log('[read-bookname] triggered')
 
-  // const { db } = await connectToDatabase()
+  const { db } = await connectToDatabase()
 
-  // const highlightCollection = await db.collection('highlights')
+  const highlightCollection = await db.collection('highlights')
 
-  // const result = await highlightCollection.distinct('bookName')
+  const result = await highlightCollection.distinct('bookName')
 
   res.json(['Atomic Habits', 'Steal Like an Artist'])
 }

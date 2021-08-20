@@ -17,6 +17,7 @@ async function handler(req, res) {
 
     res.status(200).json({ message: 'highlight deleted', result: result })
     console.info('[deleteHighlight] result:', result)
+    client.close()
   }
 }
 

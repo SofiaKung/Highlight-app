@@ -14,14 +14,14 @@ async function fetcher(url) {
 }
 
 export default function Nav() {
-  const { result, error } = useSWR('/api/read-bookname', fetcher)
+  // const { result, error } = useSWR('/api/read-bookname', fetcher)
   const [sidebar, setSidebar] = useState(true)
   const showSidebar = () => setSidebar(!sidebar)
 
-  if (error) return <h1>Something went wrong!</h1>
-  if (!result) return <h1>Loading...</h1>
+  // if (error) return <h1>Something went wrong!</h1>
+  // if (!result) return <h1>Loading...</h1>
   // const { bookname } = result
-  console.log(result)
+  // console.log(result)
 
   return (
     <>
