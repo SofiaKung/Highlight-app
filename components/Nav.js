@@ -17,11 +17,7 @@ export default function Nav() {
   // const { result, error } = useSWR('/api/read-bookname', fetcher)
   const [sidebar, setSidebar] = useState(true)
   const showSidebar = () => setSidebar(!sidebar)
-
-  // if (error) return <h1>Something went wrong!</h1>
-  // if (!result) return <h1>Loading...</h1>
-  // const { bookname } = result
-  // console.log(result)
+  const bookName = ['Atomic Habits', 'Steal Like an Artist']
 
   return (
     <>
@@ -40,17 +36,21 @@ export default function Nav() {
               </button>
               <li className={classes.navItem}>
                 <Link href="/">
-                  <a>Upload your highlights</a>
+                  <a>Import your highlights</a>
                 </Link>
               </li>
               <li className={classes.navItem}>
                 <Link href="/highlights">
-                  <a>highlights</a>
-                  {/* {result.map((bookname, index) => (
-                    <a key={bookname.index}>bookname</a>
-                  ))} */}
+                  <a>Books</a>
                 </Link>
               </li>
+              {bookName.map((book, index) => (
+                <li key={index}>
+                  <Link href="">
+                    <a>{book}</a>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
         </div>
