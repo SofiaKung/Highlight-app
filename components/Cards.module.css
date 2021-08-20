@@ -1,6 +1,6 @@
 .card {
   background: white;
-  margin: auto;
+  margin: auto; /* align cards to center */
   width: 50%;
   border: 10px 20px;
   /* padding: 5px; */

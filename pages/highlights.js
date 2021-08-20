@@ -1,4 +1,5 @@
 import { connectToDatabase } from '../utils/mongodb'
+
 import Cards from '../components/Cards'
 import Nav from '../components/Nav'
 
@@ -6,10 +7,18 @@ export default function Homepage({ properties, bookName }) {
   return (
     <>
       <Nav></Nav>
-
       {properties && (
         <div>
-          <h1 style={{ textAlign: 'center' }}> {bookName}</h1>
+          <h1
+            style={{
+              margin: 'auto',
+              textAlign: 'center',
+              padding: '80px 0px 40px',
+            }}
+          >
+            {' '}
+            {bookName}
+          </h1>
 
           {properties.map((item, index) => (
             <Cards

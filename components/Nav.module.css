@@ -27,8 +27,14 @@
   cursor: pointer;
 }
 
+.rightIcon {
+  padding: 22px 4px 10px 2px;
+  width: 20px;
+  color: grey;
+}
+
 .icon {
-  padding: 2px 4px 10px 2px;
+  padding: 2px 4px 10px 180px;
   width: 20px;
   color: grey;
 }

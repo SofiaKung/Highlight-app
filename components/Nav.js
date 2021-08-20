@@ -14,8 +14,9 @@ export default function Nav() {
     <>
       {/* button to show side bar */}
       <button className={classes.showButton} onClick={showSidebar}>
-        <ChevronDoubleRightIcon className={classes.icon} />
+        <ChevronDoubleRightIcon className={classes.rightIcon} />
       </button>
+
       {/* side bar */}
       {sidebar ? (
         <div className={classes.sideBar}>
