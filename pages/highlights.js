@@ -6,7 +6,6 @@ import Nav from '../components/Nav'
 export default function Homepage({ properties, bookName }) {
   return (
     <>
-      <Nav></Nav>
       {properties && (
         <div>
           <h1
@@ -16,7 +15,6 @@ export default function Homepage({ properties, bookName }) {
               padding: '80px 0px 40px',
             }}
           >
-            {' '}
             {bookName}
           </h1>
 
