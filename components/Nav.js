@@ -1,23 +1,13 @@
 import { useState } from 'react'
+import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
-import {
-  ChevronDoubleLeftIcon,
-  ChevronDoubleRightIcon,
-} from '@heroicons/react/outline'
 import classes from './Nav.module.css'
-import useSWR from 'swr'
-
-//fetcher for useSWR
-async function fetcher(url) {
-  const res = await fetch(url)
-  return res
-}
+import { useAppContext } from '../context/global_state'
 
 export default function Nav() {
-  // const { result, error } = useSWR('/api/read-bookname', fetcher)
   const [sidebar, setSidebar] = useState(true)
+  const { books } = useAppContext();
   const showSidebar = () => setSidebar(!sidebar)
-  const bookName = ['Atomic Habits', 'Steal Like an Artist']
 
   return (
     <>
@@ -44,10 +34,10 @@ export default function Nav() {
                   <a>Books</a>
                 </Link>
               </li>
-              {bookName.map((book, index) => (
+              {books.map((book, index) => (
                 <li key={index}>
                   <Link href="">
-                    <a>{book}</a>
+                    <a>{book.name}</a>
                   </Link>
                 </li>
               ))}

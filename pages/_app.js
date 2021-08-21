@@ -1,13 +1,14 @@
 import '../styles/globals.css'
 import Layout from '../components/layout'
-
-import { createContext, useContext } from 'react'
+import { AppWrapper } from '../context/global_state'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <AppWrapper>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </AppWrapper>
   )
 }
 
