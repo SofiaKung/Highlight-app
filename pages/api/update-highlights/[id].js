@@ -21,7 +21,6 @@ async function handler(req, res) {
 
     res.status(200).json({ message: 'highlight updated', result: result })
     console.info('[updateHighlight] result:', result)
-    client.close()
   }
 }
 
