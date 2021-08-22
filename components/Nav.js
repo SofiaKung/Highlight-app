@@ -17,7 +17,7 @@ export default function Nav() {
       </button>
 
       {/* side bar */}
-      {sidebar ? (
+      {sidebar && (
         <div className={classes.sideBar}>
           <nav className={classes.navMenu}>
             <ul className={classes.ul}>
@@ -44,8 +44,6 @@ export default function Nav() {
             </ul>
           </nav>
         </div>
-      ) : (
-        ''
       )}
     </>
   )
