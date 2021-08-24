@@ -1,0 +1,48 @@
+.navMenu {
+  background-color: white;
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px 20px;
+  /* align-items: flex-start; */
+}
+
+.showButton {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  position: fixed;
+  padding: 20px 60px;
+}
+
+.button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.rightIcon {
+  padding: 22px 4px 10px 2px;
+  width: 20px;
+  color: grey;
+}
+
+.icon {
+  padding: 2px 4px 10px 180px;
+  width: 20px;
+  color: grey;
+}
+
+.ul {
+  list-style-type: none;
+}
+
+.navItem {
+  padding: 4px;
+}

@@ -17,8 +17,6 @@ async function handler(req, res) {
 
     const result = await highlightCollection.insertMany(data)
     console.info('[uploadHighlight] result:', result)
-
-    client.close()
   }
 }
 
