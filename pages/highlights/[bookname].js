@@ -1,9 +1,17 @@
-import { connectToDatabase } from '../utils/mongodb'
-
-import Cards from '../components/Cards'
-import Nav from '../components/Nav'
+// imports relevant highlights for each book
+import { connectToDatabase } from '../../utils/mongodb'
+//get access on router object, to get the values of URL
+import { useRouter } from 'next/dist/client/router'
+import Cards from '../../components/Cards'
 
 export default function Homepage({ properties, bookName }) {
+  // const router = useRouter()
+  // const bookname = router.query.bookname
+
+  // function formatBookname(book) {
+  //   return book.split('_').join(' ')
+
+  // const formatted_bookname = formatBookname(bookname)
   return (
     <>
       {properties && (
@@ -38,17 +46,21 @@ export default function Homepage({ properties, bookName }) {
 }
 
 export async function getServerSideProps(context) {
+  const bookname = context.query.bookname
+  const format_bookname = bookname.split('_').join(' ')
   const { db } = await connectToDatabase()
 
-  const result = await db.collection('highlights').find({}).toArray()
+  const result = await db
+    .collection('highlights')
+    .find({ bookName: format_bookname })
+    .toArray()
 
   const data = JSON.parse(JSON.stringify(result))
-  const book = data[0].bookName
 
   // console.log(data)
 
   return {
     // props: { properties: data },
-    props: { properties: data, bookName: book },
+    props: { properties: data, bookName: format_bookname },
   }
 }

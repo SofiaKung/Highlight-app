@@ -14,10 +14,9 @@ export default function Nav() {
   const showSidebar = () => setSidebar(!sidebar)
 
   async function handleFetch() {
-    console.log('handle fetch in progress')
-    const res = await fetch('api/read-bookname')
+    console.log('handle fetch booknames for nav in progress')
+    const res = await fetch('/api/read-bookname')
     const data = await res.text().then(JSON.parse)
-    // const data = JSON.parse(res)
     console.log('handle fetch res:', data.result)
     setBookname(data.result)
   }
@@ -27,6 +26,10 @@ export default function Nav() {
     handleFetch()
   }, [])
   console.log('processing')
+
+  function dynamicPath(book) {
+    return '/highlights/' + book.split(' ').join('_')
+  }
 
   return (
     <>
@@ -50,13 +53,13 @@ export default function Nav() {
                 </Link>
               </li>
               <li className={classes.navItem}>
-                <Link href="/highlights">
+                <Link href="">
                   <a>Books</a>
                 </Link>
               </li>
               {bookname.map((book, index) => (
                 <li key={index}>
-                  <Link href="">
+                  <Link href={dynamicPath(book)}>
                     <a>{book}</a>
                   </Link>
                 </li>

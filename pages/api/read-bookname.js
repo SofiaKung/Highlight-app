@@ -12,7 +12,7 @@ async function handler(req, res) {
 
   const result = await highlightCollection.distinct('bookName')
 
-  res.status(200).json({ result: result })
+  res.json({ result: result })
 }
 
 export default handler
