@@ -52,13 +52,9 @@ export default function Nav() {
                   <a>Import your highlights</a>
                 </Link>
               </li>
-              <li className={classes.navItem}>
-                <Link href="">
-                  <a>Books</a>
-                </Link>
-              </li>
+              <p className={classes.navItem}>Books</p>
               {bookname.map((book, index) => (
-                <li key={index}>
+                <li className={classes.navBookname} key={index}>
                   <Link href={dynamicPath(book)}>
                     <a>{book}</a>
                   </Link>

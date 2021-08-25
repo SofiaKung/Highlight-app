@@ -44,5 +44,14 @@
 }
 
 .navItem {
-  padding: 4px;
+  padding: 4px 4px;
+}
+
+.navBookname {
+  padding: 7px 20px;
+  color: #595959;
+}
+
+.navBookname:hover {
+  color: #717ef3;
 }
