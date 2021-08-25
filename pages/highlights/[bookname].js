@@ -1,17 +1,8 @@
 // imports relevant highlights for each book
 import { connectToDatabase } from '../../utils/mongodb'
-//get access on router object, to get the values of URL
-import { useRouter } from 'next/dist/client/router'
 import Cards from '../../components/Cards'
 
 export default function Homepage({ properties, bookName }) {
-  // const router = useRouter()
-  // const bookname = router.query.bookname
-
-  // function formatBookname(book) {
-  //   return book.split('_').join(' ')
-
-  // const formatted_bookname = formatBookname(bookname)
   return (
     <>
       {properties && (
@@ -61,7 +52,6 @@ export async function getServerSideProps(context) {
   // console.log(data)
 
   return {
-    // props: { properties: data },
     props: { properties: data, bookName: format_bookname },
   }
 }

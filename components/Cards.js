@@ -15,7 +15,10 @@ import { HeartIcon as SolidIcon } from '@heroicons/react/solid'
 export default function Cards(props) {
   const [editQuote, setEditQuote] = useState(false)
   const [Highlight, setHighlight] = useState(props.highlight)
-  const [tag_array, setTag] = useState(props.tag ? props.tag : [])
+  // show add tag status
+  const [tagStatus, setTagStatus] = useState(false)
+  // list of tags
+  const [tagArray, setTag] = useState(props.tag ? props.tag : [])
   const [tagInput, setTagInput] = useState()
   const [Note, setNote] = useState(props.note)
   const [isFavorite, setFavorite] = useState(props.favorite)
@@ -25,25 +28,29 @@ export default function Cards(props) {
     setEditQuote((editQuote) => true)
   }
 
+  function enableTag() {
+    setTagStatus((tagStatus) => true)
+  }
+
   // enable favorite and update favorite tag
   function enableFavorite() {
     setFavorite(() => !isFavorite)
-    console.log('Favorite status:', !isFavorite)
+    // console.log('Favorite status:', !isFavorite)
     handleFavorite()
   }
 
   // update Note state according to input
   const changeNoteHandler = (e) => {
-    console.log('change note handler running')
+    // console.log('change note handler running')
     setNote(e.target.innerText)
-    console.log('updated notes', Note)
+    // console.log('updated notes', Note)
   }
 
   // update Highlight state according to input
   const changeHighlightHandler = (e) => {
-    console.log('change highlight handler running')
+    // console.log('change highlight handler running')
     setHighlight(e.target.innerText)
-    console.log('updated highlight', Highlight)
+    // console.log('updated highlight', Highlight)
   }
 
   // update highlight and note to db upon clicking Save button
@@ -63,7 +70,7 @@ export default function Cards(props) {
 
   // Update highlights
   const handleUpdate = async (id, updatedData) => {
-    console.log('start of handleUpdate ' + id)
+    // console.log('start of handleUpdate ' + id)
     await fetch('/api/update-highlights/' + id, {
       method: 'PUT', //put for updating
       body: JSON.stringify(updatedData),
@@ -78,23 +85,40 @@ export default function Cards(props) {
 
   // delete highlight
   const handleDelete = async (id) => {
-    console.log('delete highlight initated: ' + id)
+    // console.log('delete highlight initated: ' + id)
     await fetch('/api/delete-highlights/' + id, {
       method: 'DELETE', //put for updating
       headers: { 'Content-Type': 'application/json' },
     })
   }
-  const deleteTag = function () {}
-  // when users press on enter to add tag
+
+  // function to delete tags
+  const deleteTag = function (e) {
+    const tagToRemove = e.target.innerText
+    // console.log('tagToRemove', e.target.innerText)
+    let updated_array = arrayRemove(tagArray, tagToRemove)
+    setTag(updated_array)
+    let id = props._id
+    handleUpdate(id, { tag: updated_array })
+  }
+
+  // function to remove items from array
+  function arrayRemove(arr, value) {
+    return arr.filter(function (ele) {
+      return ele != value
+    })
+  }
+
+  // when users press on enter to add tag, update tag state and update the tags in DB
   const keyPress = function (event) {
-    if ([36, 13, 76].includes(event.charCode)) {
+    if ([13, 36, 76].includes(event.charCode)) {
+      event.preventDefault()
       setTagInput('')
       document.getElementById('tagInput').focus()
-      const updated_tag = tag_array.concat([event.target.value])
+      const updated_tag = tagArray.concat([event.target.value])
       setTag(updated_tag)
 
       // update tag
-
       let id = props._id
       let tag = updated_tag
       handleUpdate(id, { tag })
@@ -136,8 +160,8 @@ export default function Cards(props) {
         {/* display tags  */}
         <div className={classes.row}>
           <div className={classes.tagSection}>
-            {tag_array &&
-              tag_array.map((tagItem, index) => (
+            {tagArray &&
+              tagArray.map((tagItem, index) => (
                 <button
                   className={classes.tagButton}
                   key={index}
@@ -150,19 +174,22 @@ export default function Cards(props) {
           </div>
           {/* start of icon section */}
           <div className={classes.iconSection}>
-            <input
-              id="tagInput"
-              // contentEditable="true"
-              className={classes.tagInput}
-              onChange={(e) => {
-                setTagInput(e.target.input)
-              }}
-              onKeyPress={keyPress}
-              value={tagInput}
-              defaultValue="Add a tag"
-            />
+            {/* show add tag if tag icon is clicked */}
+            {tagStatus && (
+              <input
+                id="tagInput"
+                // contentEditable="true"
+                className={classes.tagInput}
+                onChange={(e) => {
+                  setTagInput(e.target.input)
+                }}
+                onKeyPress={keyPress}
+                value={tagInput}
+                defaultValue="Add a tag"
+              />
+            )}
 
-            <button className={classes.button}>
+            <button className={classes.button} onClick={enableTag}>
               <TagIcon className={classes.icon} />
             </button>
             <button className={classes.button} onClick={enableQuoteEdit}>
