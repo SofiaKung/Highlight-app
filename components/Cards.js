@@ -6,6 +6,8 @@ import {
   TrashIcon,
   PencilAltIcon,
   HeartIcon as OutlineIcon,
+  TagIcon,
+  XIcon,
 } from '@heroicons/react/outline'
 
 import { HeartIcon as SolidIcon } from '@heroicons/react/solid'
@@ -13,6 +15,8 @@ import { HeartIcon as SolidIcon } from '@heroicons/react/solid'
 export default function Cards(props) {
   const [editQuote, setEditQuote] = useState(false)
   const [Highlight, setHighlight] = useState(props.highlight)
+  const [tag_array, setTag] = useState(props.tag ? props.tag : [])
+  const [tagInput, setTagInput] = useState()
   const [Note, setNote] = useState(props.note)
   const [isFavorite, setFavorite] = useState(props.favorite)
 
@@ -60,7 +64,7 @@ export default function Cards(props) {
   // Update highlights
   const handleUpdate = async (id, updatedData) => {
     console.log('start of handleUpdate ' + id)
-    await fetch('api/update-highlights/' + id, {
+    await fetch('/api/update-highlights/' + id, {
       method: 'PUT', //put for updating
       body: JSON.stringify(updatedData),
       headers: { 'Content-Type': 'application/json' },
@@ -75,10 +79,26 @@ export default function Cards(props) {
   // delete highlight
   const handleDelete = async (id) => {
     console.log('delete highlight initated: ' + id)
-    await fetch('api/delete-highlights/' + id, {
+    await fetch('/api/delete-highlights/' + id, {
       method: 'DELETE', //put for updating
       headers: { 'Content-Type': 'application/json' },
     })
+  }
+  const deleteTag = function () {}
+  // when users press on enter to add tag
+  const keyPress = function (event) {
+    if ([36, 13, 76].includes(event.charCode)) {
+      setTagInput('')
+      document.getElementById('tagInput').focus()
+      const updated_tag = tag_array.concat([event.target.value])
+      setTag(updated_tag)
+
+      // update tag
+
+      let id = props._id
+      let tag = updated_tag
+      handleUpdate(id, { tag })
+    }
   }
 
   return (
@@ -112,28 +132,55 @@ export default function Cards(props) {
           </button>
         </div>
 
-        {/* icons section */}
-        <div className={classes.iconSection}>
-          <button className={classes.button}>
-            <ChatAltIcon className={classes.icon} />
-          </button>
-          <button className={classes.button} onClick={enableQuoteEdit}>
-            <PencilAltIcon className={classes.icon} />
-          </button>
+        {/* icons row */}
+        {/* display tags  */}
+        <div className={classes.row}>
+          <div className={classes.tagSection}>
+            {tag_array &&
+              tag_array.map((tagItem, index) => (
+                <button
+                  className={classes.tagButton}
+                  key={index}
+                  onClick={deleteTag}
+                >
+                  {tagItem}
+                  <XIcon className={classes.deleteTag} />
+                </button>
+              ))}
+          </div>
+          {/* start of icon section */}
+          <div className={classes.iconSection}>
+            <input
+              id="tagInput"
+              // contentEditable="true"
+              className={classes.tagInput}
+              onChange={(e) => {
+                setTagInput(e.target.input)
+              }}
+              onKeyPress={keyPress}
+              value={tagInput}
+              defaultValue="Add a tag"
+            />
 
-          {isFavorite ? (
-            <button className={classes.button} onClick={enableFavorite}>
-              <SolidIcon className={classes.icon} />
+            <button className={classes.button}>
+              <TagIcon className={classes.icon} />
             </button>
-          ) : (
-            <button className={classes.button} onClick={enableFavorite}>
-              <OutlineIcon className={classes.icon} />
+            <button className={classes.button} onClick={enableQuoteEdit}>
+              <PencilAltIcon className={classes.icon} />
             </button>
-          )}
-
-          <button className={classes.button}>
-            <TrashIcon className={classes.icon} onClick={enableDelete} />
-          </button>
+            {isFavorite ? (
+              <button className={classes.button} onClick={enableFavorite}>
+                <SolidIcon className={classes.icon} />
+              </button>
+            ) : (
+              <button className={classes.button} onClick={enableFavorite}>
+                <OutlineIcon className={classes.icon} />
+              </button>
+            )}
+            <button className={classes.button}>
+              <TrashIcon className={classes.icon} onClick={enableDelete} />
+            </button>
+          </div>
         </div>
       </div>
     </>

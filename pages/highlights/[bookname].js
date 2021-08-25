@@ -37,6 +37,7 @@ export default function Homepage({ properties, bookName }) {
               chapter={item.chapter}
               note={item.note}
               favorite={item.favorite}
+              tag={item.tag}
             />
           ))}
         </div>
