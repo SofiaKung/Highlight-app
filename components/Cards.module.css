@@ -31,6 +31,12 @@
   text-align: justify;
 }
 
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .iconSection {
   display: flex;
   background-color: white;
@@ -45,6 +51,11 @@
   padding: 2px 4px 10px 2px;
   width: 25px;
   color: black;
+}
+.deleteTag {
+  padding: 2px 0px 0px 5px;
+  width: 10px;
+  color: whote;
 }
 
 .button {
@@ -78,4 +89,43 @@
 
 .saveButton:hover {
   background-color: darkslateblue;
+}
+
+.tagSection {
+  display: flex;
+  background-color: white;
+  justify-content: flex-start;
+  border: none;
+  outline: none;
+  /*  spacing around tag section */
+  margin-left: 35px;
+  /* position: absolute; */
+}
+
+.tagButton {
+  background-color: #a7a6a7;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  /* size of button */
+  padding: 8px 13px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  /* spacing around button */
+  margin: 9px 1px 20px 5px;
+  cursor: pointer;
+}
+
+.tagInput {
+  margin: 5px 2px;
+
+  /* border: 2px 5px; */
+  padding: 5px 0px 3px 8px;
+  border-radius: 30px;
+  border: grey;
+
+  color: #717ef3;
+  /* font-family: Arial, Helvetica, sans-serif; */
 }
