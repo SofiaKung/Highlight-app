@@ -26,8 +26,8 @@ In this app, you can:
 The project is still under development, I plan to add a section in the sidebar to display existing tags and pages to display highlights filtered by a relevant tag. 
 
 
-## Setup
-To run this project, install it locally using npm: 
+## Getting started
+First, run the development server:
 
 ```bash
 npm run dev
