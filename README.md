@@ -52,10 +52,10 @@ npm run dev
 
 To connect to your own Mongo DB: 
 
-Go to MongoDB Altas official page to sign up for an account: 
-1. Create a free cluster 
-2. Create a user with read and write rights 
-3. Add 0.0.0.0/0 IP in Network Access setting
+1. Go to MongoDB Altas official page to sign up for an account
+2.  Create a free cluster 
+3. Create a user with read and write rights 
+4. Add 0.0.0.0/0 IP in Network Access setting
 
 
 Create a `.env.local` file in your root directory:
