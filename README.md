@@ -22,7 +22,7 @@ In this app, you can:
 - Learnt to connect to MongoDB, perform CRUD operations with Next.js api-routes 
 - Learnt to create environment variables 
 
-# Status
+## Status
 The project is still under development, I plan to add a section in the sidebar to display existing tags and pages to display highlights filtered by a relevant tag. 
 
 
