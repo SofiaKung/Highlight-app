@@ -1,26 +1,29 @@
 
 
 # Highlight-app 
-An e-book highglight organiser, upload your highlights from ebooks to keep your highlights in one place for easy access and review. The app is created with Node Next.js bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and MongoDB.
+An e-book highlight organiser, upload your highlights from ebooks to keep your highlights in one place for easy access and review. The app is created with Next.js and MongoDB, deployed with Vercel.
 
 ## Introduction 
-I created this app to better organise my e-book highlights from Libby app. 
+I created this app to better organise my e-book highlights from the Libby app. Deployed app is available at https://highlight-app.vercel.app
 
 ## Features
 In this app, you can: 
-- Upload e-book highlights in CSV format 
+- Upload ebook highlights in CSV format 
 - Edit highlights and notes 
 - Delete highlights 
 - Favorite a highlight 
 - Add tags to organise your highlight
-First, run the development server:
+
 
 ## Key learnings: 
 - Learnt to use Whimsical to design the layout of the web app 
-- Learnt to use various Next.js built in fuctions 
+- Learnt to use various Next.js built in functions 
 - Learnt to use ServerSideProps and Async/Await to fetch data from DB 
 - Learnt to connect to MongoDB, perform CRUD operations with Next.ks api-routes 
 - Learnt to create environment variables 
+
+# Status
+The project is still under development, I plan to add a section in the sidebar to display existing tags and pages to display highlights filtered by a relevant tag. 
 
 
 ## Setup
@@ -51,3 +54,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 What your application does,
 Why you used the technologies you used,
 Some of the challenges you faced and features you hope to implement in the future.
+
+
