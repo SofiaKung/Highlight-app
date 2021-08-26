@@ -1,7 +1,7 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
 
 # Highlight-app 
-An e-book highglight organiser, upload your highlights from ebooks to keep your highlights in one place for easy access and review. The app is created with Node Next.js and MongoDB.
+An e-book highglight organiser, upload your highlights from ebooks to keep your highlights in one place for easy access and review. The app is created with Node Next.js bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and MongoDB.
 
 ## Introduction 
 I created this app to better organise my e-book highlights from Libby app. 
@@ -17,7 +17,7 @@ First, run the development server:
 
 ## Key learnings: 
 - Learnt to use Whimsical to design the layout of the web app 
-- Learnt to use various Next.js built in fuctions su
+- Learnt to use various Next.js built in fuctions 
 - Learnt to use ServerSideProps and Async/Await to fetch data from DB 
 - Learnt to connect to MongoDB, perform CRUD operations with Next.ks api-routes 
 - Learnt to create environment variables 
