@@ -10,7 +10,7 @@ I created this app to better organise my e-book highlights from the Libby app. D
 In this app, you can: 
 - Upload ebook highlights in CSV format 
 - Edit highlights and notes 
-- Delete a highlights 
+- Delete a highlight
 - Favorite a highlight 
 - Add tags to organise your highlights
 
