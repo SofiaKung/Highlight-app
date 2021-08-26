@@ -10,16 +10,16 @@ I created this app to better organise my e-book highlights from the Libby app. D
 In this app, you can: 
 - Upload ebook highlights in CSV format 
 - Edit highlights and notes 
-- Delete highlights 
+- Delete a highlights 
 - Favorite a highlight 
-- Add tags to organise your highlight
+- Add tags to organise your highlights
 
 
 ## Key learnings: 
 - Learnt to use Whimsical to design the layout of the web app 
 - Learnt to use various Next.js built in functions 
 - Learnt to use ServerSideProps and Async/Await to fetch data from DB 
-- Learnt to connect to MongoDB, perform CRUD operations with Next.ks api-routes 
+- Learnt to connect to MongoDB, perform CRUD operations with Next.js api-routes 
 - Learnt to create environment variables 
 
 # Status
