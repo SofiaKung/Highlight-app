@@ -13,45 +13,16 @@ import {
 import { HeartIcon as SolidIcon } from '@heroicons/react/solid'
 
 export default function Cards(props) {
+  // allow highlight to be editable
   const [editQuote, setEditQuote] = useState(false)
   const [Highlight, setHighlight] = useState(props.highlight)
   // show add tag status
   const [tagStatus, setTagStatus] = useState(false)
   // list of tags
-  const [tagArray, setTag] = useState(props.tag ? props.tag : [])
+  const [tagArray, setTag] = useState(props.tag ?? []) // checks for props.tag if true then props.tag else []
   const [tagInput, setTagInput] = useState()
   const [Note, setNote] = useState(props.note)
   const [isFavorite, setFavorite] = useState(props.favorite)
-
-  // enable highlight to be edited
-  function enableQuoteEdit() {
-    setEditQuote((editQuote) => true)
-  }
-
-  function enableTag() {
-    setTagStatus((tagStatus) => true)
-  }
-
-  // enable favorite and update favorite tag
-  function enableFavorite() {
-    setFavorite(() => !isFavorite)
-    // console.log('Favorite status:', !isFavorite)
-    handleFavorite()
-  }
-
-  // update Note state according to input
-  const changeNoteHandler = (e) => {
-    // console.log('change note handler running')
-    setNote(e.target.innerText)
-    // console.log('updated notes', Note)
-  }
-
-  // update Highlight state according to input
-  const changeHighlightHandler = (e) => {
-    // console.log('change highlight handler running')
-    setHighlight(e.target.innerText)
-    // console.log('updated highlight', Highlight)
-  }
 
   // update highlight and note to db upon clicking Save button
   const handleSave = () => {
@@ -136,7 +107,7 @@ export default function Cards(props) {
           className={classes.para}
           contentEditable={editQuote}
           suppressContentEditableWarning={true}
-          onInput={changeHighlightHandler}
+          onInput={(e) => setHighlight(e.target.innerText)}
         >
           {props.highlight}
         </div>
@@ -146,9 +117,9 @@ export default function Cards(props) {
           <div
             contentEditable="true"
             suppressContentEditableWarning={true}
-            onInput={changeNoteHandler}
+            onInput={(e) => setNote(e.target.innerText)}
           >
-            {props.note ? props.note : 'Note'}
+            {props.note ?? 'Note'}
           </div>
 
           <button className={classes.saveButton} onClick={handleSave}>
@@ -189,21 +160,34 @@ export default function Cards(props) {
               />
             )}
 
-            <button className={classes.button} onClick={enableTag}>
+            <button
+              className={classes.button}
+              onClick={() => setTagStatus(true)}
+            >
               <TagIcon className={classes.icon} />
             </button>
-            <button className={classes.button} onClick={enableQuoteEdit}>
+            <button
+              className={classes.button}
+              onClick={() => setEditQuote(true)}
+            >
               <PencilAltIcon className={classes.icon} />
             </button>
-            {isFavorite ? (
-              <button className={classes.button} onClick={enableFavorite}>
+
+            <button
+              className={classes.button}
+              onClick={() => {
+                setFavorite(!isFavorite)
+                // update favorite status to db
+                handleFavorite()
+              }}
+            >
+              {isFavorite ? (
                 <SolidIcon className={classes.icon} />
-              </button>
-            ) : (
-              <button className={classes.button} onClick={enableFavorite}>
+              ) : (
                 <OutlineIcon className={classes.icon} />
-              </button>
-            )}
+              )}
+            </button>
+
             <button className={classes.button}>
               <TrashIcon className={classes.icon} onClick={enableDelete} />
             </button>
