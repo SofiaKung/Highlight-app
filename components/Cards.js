@@ -1,6 +1,5 @@
 import classes from './Cards.module.css'
 import { useState } from 'react'
-
 import {
   TrashIcon,
   PencilAltIcon,
@@ -8,7 +7,6 @@ import {
   TagIcon,
   XIcon,
 } from '@heroicons/react/outline'
-
 import { HeartIcon as SolidIcon } from '@heroicons/react/solid'
 
 export default function Cards(props) {
@@ -25,7 +23,6 @@ export default function Cards(props) {
 
   // Update highlights
   const handleUpdate = async (id, updatedData) => {
-    // console.log('handleUpdate initiated ' + id)
     await fetch('/api/update-highlights/' + id, {
       method: 'PUT',
       body: JSON.stringify(updatedData),
@@ -35,7 +32,6 @@ export default function Cards(props) {
 
   // delete highlight
   const handleDelete = async (id) => {
-    // console.log('delete highlight initated: ' + id)
     await fetch('/api/delete-highlights/' + id, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
