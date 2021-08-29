@@ -2,7 +2,6 @@ import classes from './Cards.module.css'
 import { useState } from 'react'
 
 import {
-  ChatAltIcon,
   TrashIcon,
   PencilAltIcon,
   HeartIcon as OutlineIcon,
@@ -24,16 +23,11 @@ export default function Cards(props) {
   const [Note, setNote] = useState(props.note)
   const [isFavorite, setFavorite] = useState(props.favorite)
 
-  // update highlight and note to db upon clicking Save button
-  const handleSave = () => {
-    handleUpdate(props._id, { modifiedHighlight: Highlight, note: Note })
-  }
-
   // Update highlights
   const handleUpdate = async (id, updatedData) => {
-    // console.log('start of handleUpdate ' + id)
+    // console.log('handleUpdate initiated ' + id)
     await fetch('/api/update-highlights/' + id, {
-      method: 'PUT', //put for updating
+      method: 'PUT',
       body: JSON.stringify(updatedData),
       headers: { 'Content-Type': 'application/json' },
     })
@@ -43,13 +37,13 @@ export default function Cards(props) {
   const handleDelete = async (id) => {
     // console.log('delete highlight initated: ' + id)
     await fetch('/api/delete-highlights/' + id, {
-      method: 'DELETE', //put for updating
+      method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     })
   }
 
   // function to delete tags
-  const deleteTag = function (e) {
+  const deleteTag = (e) => {
     const tagToRemove = e.target.innerText
     let updated_array = arrayRemove(tagArray, tagToRemove)
     setTag(updated_array)
@@ -57,19 +51,19 @@ export default function Cards(props) {
   }
 
   // function to remove items from array
-  function arrayRemove(arr, value) {
+  const arrayRemove = (arr, value) => {
     return arr.filter(function (ele) {
       return ele != value
     })
   }
 
-  // when users press on enter to add tag, update tag state and update the tags in DB
-  const keyPress = function (event) {
-    if ([13, 36, 76].includes(event.charCode)) {
-      event.preventDefault() // prevent the page from scrolling up after delete tag
+  // enter to submit new tags, update tag state and update the tags in DB
+  const keyPress = (e) => {
+    if ([13, 36, 76].includes(e.charCode)) {
+      e.preventDefault() // prevent the page from scrolling up after delete tag
       setTagInput('')
       document.getElementById('tagInput').focus()
-      const updated_tag = tagArray.concat([event.target.value])
+      const updated_tag = tagArray.concat([e.target.value])
       setTag(updated_tag)
       handleUpdate(props._id, { tag: updated_tag })
     }
