@@ -26,17 +26,7 @@ export default function Cards(props) {
 
   // update highlight and note to db upon clicking Save button
   const handleSave = () => {
-    let id = props._id
-    let modifiedHighlight = Highlight //save to modified highlight column name
-    let note = Note //save to modified highlight note name
-    handleUpdate(id, { modifiedHighlight, note })
-  }
-
-  // update favorite tag to db
-  const handleFavorite = () => {
-    let id = props._id
-    let favorite = !isFavorite //save to modified highlight column name
-    handleUpdate(id, { favorite })
+    handleUpdate(props._id, { modifiedHighlight: Highlight, note: Note })
   }
 
   // Update highlights
@@ -47,11 +37,6 @@ export default function Cards(props) {
       body: JSON.stringify(updatedData),
       headers: { 'Content-Type': 'application/json' },
     })
-  }
-
-  // enable favorite and update favorite tag
-  const enableDelete = async () => {
-    handleDelete(props._id).then(window.location.reload())
   }
 
   // delete highlight
@@ -66,11 +51,9 @@ export default function Cards(props) {
   // function to delete tags
   const deleteTag = function (e) {
     const tagToRemove = e.target.innerText
-    // console.log('tagToRemove', e.target.innerText)
     let updated_array = arrayRemove(tagArray, tagToRemove)
     setTag(updated_array)
-    let id = props._id
-    handleUpdate(id, { tag: updated_array })
+    handleUpdate(props._id, { tag: updated_array })
   }
 
   // function to remove items from array
@@ -83,16 +66,12 @@ export default function Cards(props) {
   // when users press on enter to add tag, update tag state and update the tags in DB
   const keyPress = function (event) {
     if ([13, 36, 76].includes(event.charCode)) {
-      event.preventDefault()
+      event.preventDefault() // prevent the page from scrolling up after delete tag
       setTagInput('')
       document.getElementById('tagInput').focus()
       const updated_tag = tagArray.concat([event.target.value])
       setTag(updated_tag)
-
-      // update tag
-      let id = props._id
-      let tag = updated_tag
-      handleUpdate(id, { tag })
+      handleUpdate(props._id, { tag: updated_tag })
     }
   }
 
@@ -122,7 +101,15 @@ export default function Cards(props) {
             {props.note ?? 'Note'}
           </div>
 
-          <button className={classes.saveButton} onClick={handleSave}>
+          <button
+            className={classes.saveButton}
+            onClick={() =>
+              handleUpdate(props._id, {
+                modifiedHighlight: Highlight,
+                note: Note,
+              })
+            }
+          >
             Save
           </button>
         </div>
@@ -178,7 +165,7 @@ export default function Cards(props) {
               onClick={() => {
                 setFavorite(!isFavorite)
                 // update favorite status to db
-                handleFavorite()
+                handleUpdate(props._id, { favorite: !isFavorite })
               }}
             >
               {isFavorite ? (
@@ -189,7 +176,13 @@ export default function Cards(props) {
             </button>
 
             <button className={classes.button}>
-              <TrashIcon className={classes.icon} onClick={enableDelete} />
+              <TrashIcon
+                className={classes.icon}
+                onClick={async () => {
+                  // delete highlight and refresh page
+                  handleDelete(props._id).then(window.location.reload())
+                }}
+              />
             </button>
           </div>
         </div>
