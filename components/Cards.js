@@ -21,7 +21,6 @@ export default function Cards(props) {
   const [Note, setNote] = useState(props.note)
   const [isFavorite, setFavorite] = useState(props.favorite)
 
-  // Update highlights
   const handleUpdate = async (id, updatedData) => {
     await fetch('/api/update-highlights/' + id, {
       method: 'PUT',
@@ -30,7 +29,6 @@ export default function Cards(props) {
     })
   }
 
-  // delete highlight
   const handleDelete = async (id) => {
     await fetch('/api/delete-highlights/' + id, {
       method: 'DELETE',
@@ -38,7 +36,6 @@ export default function Cards(props) {
     })
   }
 
-  // function to delete tags
   const deleteTag = (e) => {
     const tagToRemove = e.target.innerText
     let updated_array = arrayRemove(tagArray, tagToRemove)
@@ -46,7 +43,6 @@ export default function Cards(props) {
     handleUpdate(props._id, { tag: updated_array })
   }
 
-  // function to remove items from array
   const arrayRemove = (arr, value) => {
     return arr.filter(function (ele) {
       return ele != value
@@ -55,8 +51,11 @@ export default function Cards(props) {
 
   // enter to submit new tags, update tag state and update the tags in DB
   const keyPress = (e) => {
+    console.log(e.charCode)
+    // 13 for mac return key , 36 for  return key based on google, 76 for mac enter key
     if ([13, 36, 76].includes(e.charCode)) {
-      e.preventDefault() // prevent the page from scrolling up after delete tag
+      // prevent the page from scrolling up after delete tag
+      e.preventDefault()
       setTagInput('')
       document.getElementById('tagInput').focus()
       const updated_tag = tagArray.concat([e.target.value])
@@ -88,7 +87,7 @@ export default function Cards(props) {
             suppressContentEditableWarning={true}
             onInput={(e) => setNote(e.target.innerText)}
           >
-            {props.note ?? 'Note'}
+            {props.note === '' ? 'Note' : props.note}
           </div>
 
           <button

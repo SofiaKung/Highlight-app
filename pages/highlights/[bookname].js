@@ -22,7 +22,11 @@ export default function Homepage({ properties, bookName }) {
               key={index}
               _id={item._id}
               // to load modified highlights if available, else original highlights
-              highlight={item.modifiedHighlight ?? item.highlight}
+              highlight={
+                item.modifiedHighlight === ''
+                  ? item.highlight
+                  : item.modifiedHighlight
+              }
               chapter={item.chapter}
               note={item.note}
               favorite={item.favorite}
