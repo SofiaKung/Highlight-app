@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
-import Cards from './Cards'
-import classes from './UploadFiles.module.css'
-
+import classes from './css/UploadFiles.module.css'
 import Papa from 'papaparse'
 
 export default function UploadFiles() {

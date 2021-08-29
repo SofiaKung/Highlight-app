@@ -4,7 +4,7 @@ import {
   ChevronDoubleRightIcon,
 } from '@heroicons/react/outline'
 import Link from 'next/link'
-import classes from './Nav.module.css'
+import classes from './css/Nav.module.css'
 import { useAppContext } from '../context/global_state'
 
 export default function Nav() {

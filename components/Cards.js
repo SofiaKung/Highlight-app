@@ -1,4 +1,4 @@
-import classes from './Cards.module.css'
+import classes from './css/Cards.module.css'
 import { useState } from 'react'
 import {
   TrashIcon,
@@ -54,7 +54,7 @@ export default function Cards(props) {
     console.log(e.charCode)
     // 13 for mac return key , 36 for  return key based on google, 76 for mac enter key
     if ([13, 36, 76].includes(e.charCode)) {
-      // prevent the page from scrolling up after delete tag
+      // prevent the page from scrolling up after deleting tag
       e.preventDefault()
       setTagInput('')
       document.getElementById('tagInput').focus()
